@@ -8,12 +8,30 @@ public class GiftController : MonoBehaviour
     [SerializeField] private Sprite giftCrackSprite;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private LayerMask groundLayer; // Kontrol etmek istediðiniz Layer'ý belirlemek için
+    [SerializeField] private LayerMask playerLayer; // Kontrol etmek istediðiniz Layer'ý belirlemek için
     [SerializeField] private Transform giftSpawnPosition;
+    [SerializeField] private Transform groundCheck;
     [SerializeField] private GameObject giftSpawnParticile;
     [SerializeField] private GameObject giftExplodeParticile;
+    [SerializeField] private Rigidbody2D rb;
     private void Start()
     {
 
+    }
+    private void FixedUpdate()
+    {
+        if (!IsGrounded() && rb.gravityScale != 2) 
+        {
+            rb.gravityScale = Mathf.Lerp(rb.gravityScale, 3, Time.fixedDeltaTime * 2); // Yerçekimini yavaþça artýr
+        }
+        else
+        {
+            rb.gravityScale = 1; // Yerdeyken yerçekimini normale döndür
+        }
+    }
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, playerLayer);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
