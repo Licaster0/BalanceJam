@@ -13,7 +13,7 @@ public class SmsControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && giftActive == false)
         {
             TipPanel.SetActive(true);
-            Instantiate(giftPrefab, giftSpawnPosition.transform.position, Quaternion.identity);
+            giftPrefab.SetActive(true);
             giftActive = true;
         }
         if (collision.gameObject.CompareTag("Player") && giftActive == true)
