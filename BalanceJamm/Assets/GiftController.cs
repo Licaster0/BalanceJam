@@ -7,8 +7,8 @@ public class GiftController : MonoBehaviour
 {
     [SerializeField] private Sprite giftCrackSprite;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private LayerMask groundLayer; // Kontrol etmek istediðiniz Layer'ý belirlemek için
-    [SerializeField] private LayerMask playerLayer; // Kontrol etmek istediðiniz Layer'ý belirlemek için
+    [SerializeField] private LayerMask groundLayer; // Kontrol etmek istediï¿½iniz Layer'ï¿½ belirlemek iï¿½in
+    [SerializeField] private LayerMask playerLayer; // Kontrol etmek istediï¿½iniz Layer'ï¿½ belirlemek iï¿½in
     [SerializeField] private Transform giftSpawnPosition;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private GameObject giftSpawnParticile;
@@ -21,19 +21,20 @@ public class GiftController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!IsGrounded() && rb.gravityScale != 2) 
+        if (!IsGrounded() && rb.gravityScale != 2)
         {
-            rb.gravityScale = Mathf.Lerp(rb.gravityScale, 3, Time.fixedDeltaTime * 2); // Yerçekimini yavaþça artýr
+            rb.gravityScale = Mathf.Lerp(rb.gravityScale, 3, Time.fixedDeltaTime * 2); // Yerï¿½ekimini yavaï¿½ï¿½a artï¿½r
         }
         else
         {
-            rb.gravityScale = 1; // Yerdeyken yerçekimini normale döndür
+            rb.gravityScale = 1; // Yerdeyken yerï¿½ekimini normale dï¿½ndï¿½r
         }
     }
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, playerLayer);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (((1 << collision.gameObject.layer) & groundLayer) != 0)
