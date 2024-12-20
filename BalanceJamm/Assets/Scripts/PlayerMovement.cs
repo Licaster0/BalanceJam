@@ -127,10 +127,25 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+    private IEnumerator ChangeEngineColour(Color StartColor, Color EndColor, float _duration)
+    {
+        float tick = 0;
+        while (tick < 1f)
+        {
+            spriteRenderer.color = Color.Lerp(StartColor, EndColor, tick);
+            tick += Time.deltaTime / _duration;
 
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(dashDuration);
+        spriteRenderer.color = EndColor;
+
+    }
     private IEnumerator Dash()
     {
         isDashing = true;
+        spriteRenderer.color = Color.white;
         if (DashEffect != null)
         {
             Instantiate(DashEffect, transform.position, Quaternion.identity);
@@ -155,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = originalGravity; // Yerçekimini geri getir
         rb.velocity = Vector2.zero; // Hızı sıfırla
         isDashing = false;
-
+        StartCoroutine(ChangeEngineColour(Color.white, Color.black, dashCooldown * 0.8f));
         yield return new WaitForSeconds(dashCooldown); // Cooldown bekle
         canDash = true;
     }
