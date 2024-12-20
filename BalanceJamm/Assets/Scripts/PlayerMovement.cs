@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isDashing = false;
     [SerializeField] private bool canDash = true;
 
+
+
     /*
     private bool isWallJumping;
     private float wallJumpingDirection;
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         remainingDashes = maxDashCount;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
 
     private void Update()
     {
@@ -111,14 +114,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         yield return new WaitForSeconds(dashDuration);
-        spriteRenderer.color = EndColor; 
+        spriteRenderer.color = EndColor;
 
     }
     private IEnumerator Dash()
     {
         isDashing = true;
         spriteRenderer.color = Color.white;
-        if (DashEffect !=null)
+        if (DashEffect != null)
         {
             Instantiate(DashEffect, transform.position, Quaternion.identity);
         }
