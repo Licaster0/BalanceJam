@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] public int MaxHealth;
     [SerializeField] public int CurrentHealth;
-
+    [SerializeField] public bool giftCrashed = false;
     private void Awake()
     {
         if (Instance == null)
@@ -19,5 +20,12 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         CurrentHealth = MaxHealth;
+    }
+    private void FixedUpdate()
+    {
+        if (giftCrashed && Input.GetKeyUp(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

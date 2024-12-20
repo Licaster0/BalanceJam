@@ -14,6 +14,7 @@ public class GiftController : MonoBehaviour
     [SerializeField] private GameObject giftSpawnParticile;
     [SerializeField] private GameObject giftExplodeParticile;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject gameOverScene;
     private void Start()
     {
 
@@ -49,14 +50,9 @@ public class GiftController : MonoBehaviour
             {
                 Instantiate(giftExplodeParticile.transform, gameObject.transform.position, Quaternion.identity);
                 spriteRenderer.sprite = giftCrackSprite;
-                Invoke("LoadSceneMode", 2f);
+                gameOverScene.SetActive(true);
+                PlayerManager.Instance.giftCrashed = true;
             }
         }
-    }
-
-    private void LoadSceneMode()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("calisti");
     }
 }
