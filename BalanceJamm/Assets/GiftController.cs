@@ -56,6 +56,7 @@ public class GiftController : MonoBehaviour
 
     private void LoadSceneMode()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("calisti");
     }
 }
