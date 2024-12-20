@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SmsControl : MonoBehaviour
 {
-    [SerializeField] private GameObject giftPrefab;
+    [SerializeField] private GameObject giftObject;
     [SerializeField] private GameObject giftSpawnPosition;
     [SerializeField] private GameObject TipPanel;
     [SerializeField] private bool giftActive = false;
@@ -13,7 +13,7 @@ public class SmsControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && giftActive == false)
         {
             TipPanel.SetActive(true);
-            giftPrefab.SetActive(true);
+            giftObject.SetActive(true);
             giftActive = true;
         }
         if (collision.gameObject.CompareTag("Player") && giftActive == true)
