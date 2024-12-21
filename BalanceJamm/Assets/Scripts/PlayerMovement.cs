@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpingPower;
-    [SerializeField] private int extraJumps;
+    [SerializeField] public int extraJumps;
     [SerializeField] private float jumpSpeedMultiplier = 1.5f; // Zıplama hızı artırıcı
     [SerializeField] private float fallMultiplier = 2.5f; // Düşüş hızını artırır
     [SerializeField] private float lowJumpMultiplier = 2f; // Hafif zıplama için hız artırıcı
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int maxDashCount;
     [SerializeField] private GameObject DashEffect;
     [SerializeField] private bool isDashing = false;
-    [SerializeField] private bool canDash = true;
+    [SerializeField] public bool canDash = true;
 
     [Header("Slippy Settings")]
     [SerializeField] private float slipperyFactor = 0.9f; // Kayganlık yavaşlama oranı
