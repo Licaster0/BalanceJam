@@ -56,7 +56,8 @@ public class BreakablePlatform : MonoBehaviour
         // Kırılma
         yield return new WaitForSeconds(breakDelay);
         platformCollider.enabled = false;
-        otherCollider.enabled = false;
+        if (otherCollider != null)
+            otherCollider.enabled = false;
         platformRenderer.enabled = false;
 
         // Yeniden oluşma
