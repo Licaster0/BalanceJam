@@ -53,6 +53,8 @@ public class GiftController : MonoBehaviour
                 spriteRenderer.sprite = giftCrackSprite;
                 gameOverScene.SetActive(true);
                 PlayerManager.Instance.giftCrashed = true;
+                PlayerMovement.Instance.gameObject.GetComponent<PlayerMovement>().enabled = false;
+                PlayerMovement.Instance.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             }
         }
     }

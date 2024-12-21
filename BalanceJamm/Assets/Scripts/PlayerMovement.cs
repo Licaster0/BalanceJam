@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
     [Header("Movement Settings")]
     [SerializeField] private float speed;
     [SerializeField] private float jumpingPower;
@@ -36,7 +38,13 @@ public class PlayerMovement : MonoBehaviour
     private int remainingJumps;
     private int remainingDashes;
     private SpriteRenderer spriteRenderer;
-
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
     private void Start()
     {
         remainingDashes = maxDashCount;
