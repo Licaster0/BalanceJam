@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ESCMenuScript : MonoBehaviour
 {
@@ -62,7 +63,14 @@ public class ESCMenuScript : MonoBehaviour
         */
         SwitchTo(inGameUI);
     }
-
+    public void MainScreen()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
     public void PauseGame(bool _pause)
     {
         if (_pause)
