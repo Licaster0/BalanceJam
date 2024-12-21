@@ -19,10 +19,10 @@ public class MenuCanvasManager : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
 
         // Ba�lang��ta tamamen g�r�nmez yap
-        canvasGroup.alpha = 0f;
+        //canvasGroup.alpha = 0f;
 
         // Fade In ba�lat
-        StartCoroutine(FadeInScene());
+        //StartCoroutine(FadeInScene());
     }
 
     private IEnumerator FadeInScene()
