@@ -40,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     private int remainingDashes;
     private SpriteRenderer spriteRenderer;
 
+    private float flipScale = 1f; // Yatay ölçek çarpanı
+    private float jumpScale = 1f; // Dikey ölçek çarpanı
+
     [SerializeField] private ParticleSystem dustFx;
     private void Awake()
     {
@@ -144,9 +147,8 @@ public class PlayerMovement : MonoBehaviour
         {
             dustFx.Play();
             isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            flipScale = -flipScale; // Yatay ölçeği ters çevir
+            UpdateScale();
         }
     }
     private IEnumerator ChangeEngineColour(Color StartColor, Color EndColor, float _duration)
@@ -199,31 +201,39 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator ScaleDuringJump()
     {
-        Vector3 originalScale = transform.localScale; // Karakterin orijinal boyutu
-        Vector3 targetScale = new Vector3(originalScale.x, 0.9f, originalScale.z); // Hedef boyut (y ekseni .9)
-
+        float targetJumpScale = 0.9f; // Zıplama sırasında hedef dikey ölçek
         float duration = 0.2f; // Ölçekleme süresi
         float elapsedTime = 0;
 
-        // Yavaşça hedef boyuta ölçekleme
+        // Yavaşça hedef dikey ölçeğe git
         while (elapsedTime < duration)
         {
-            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            jumpScale = Mathf.Lerp(1f, targetJumpScale, elapsedTime / duration);
+            UpdateScale();
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = targetScale; // Tam olarak hedef boyuta ayarla
+        jumpScale = targetJumpScale; // Hedef ölçeğe ayarla
+        UpdateScale();
 
-        // Hedef boyuttan eski boyuta dönüş
+        // Hedef ölçekten eski ölçeğe dönüş
         elapsedTime = 0;
         while (elapsedTime < duration)
         {
-            transform.localScale = Vector3.Lerp(targetScale, originalScale, elapsedTime / duration);
+            jumpScale = Mathf.Lerp(targetJumpScale, 1f, elapsedTime / duration);
+            UpdateScale();
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = originalScale; // Eski boyuta dön
+        jumpScale = 1f; // Eski dikey ölçeğe dön
+        UpdateScale();
+    }
+
+    private void UpdateScale()
+    {
+        // Yatay ve dikey ölçeği birleştirerek uygula
+        transform.localScale = new Vector3(flipScale, jumpScale, 1f);
     }
 }
