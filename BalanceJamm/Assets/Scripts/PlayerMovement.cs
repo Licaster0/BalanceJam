@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     private int remainingJumps;
     private int remainingDashes;
     private SpriteRenderer spriteRenderer;
+
+    [SerializeField] private ParticleSystem dustFx;
     private void Awake()
     {
         if (Instance == null)
@@ -65,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         // Zıplama
         if (IsGrounded())
         {
+            dustFx.Play();
             remainingJumps = extraJumps;
             remainingDashes = maxDashCount; // Yere değince dash sıfırlanır
         }
@@ -82,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.velocity.y < 0)
         {
+            dustFx.Play();
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
         else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
@@ -92,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         // Dash kontrolü
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && remainingDashes > 0)
         {
+            dustFx.Play();
             StartCoroutine(Dash());
         }
 
@@ -136,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
+            dustFx.Play();
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
@@ -185,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = originalGravity; // Yerçekimini geri getir
         rb.velocity = Vector2.zero; // Hızı sıfırla
         isDashing = false;
-        StartCoroutine(ChangeEngineColour(Color.white, Color.black, dashCooldown * 0.8f));
+        StartCoroutine(ChangeEngineColour(Color.white, Color.white, dashCooldown * 0.8f));
         yield return new WaitForSeconds(dashCooldown); // Cooldown bekle
         canDash = true;
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 482465971728560994}
   - component: {fileID: 8327837215991612958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3747842547415971800}
   - component: {fileID: 918243040408554083}
   - component: {fileID: 954297139505463929}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BreakEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4978,7 +4978,7 @@ GameObject:
   - component: {fileID: 117111837571151594}
   - component: {fileID: 5323173942354476184}
   - component: {fileID: 5080764224360477368}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BreakableObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
