@@ -63,7 +63,8 @@ public class BreakablePlatform : MonoBehaviour
         // Yeniden oluşma
         yield return new WaitForSeconds(respawnTime);
         platformCollider.enabled = true;
-        otherCollider.enabled = true;
+        if (otherCollider != null)
+            otherCollider.enabled = true;
         platformRenderer.enabled = true;
 
         transform.localPosition = initialPosition; // Pozisyonu sıfırla
