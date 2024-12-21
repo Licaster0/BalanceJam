@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpSpeedMultiplier);
             remainingJumps--;
+            StartCoroutine(ScaleDuringJump());
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -194,5 +195,35 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(ChangeEngineColour(Color.white, Color.white, dashCooldown * 0.8f));
         yield return new WaitForSeconds(dashCooldown); // Cooldown bekle
         canDash = true;
+    }
+
+    private IEnumerator ScaleDuringJump()
+    {
+        Vector3 originalScale = transform.localScale; // Karakterin orijinal boyutu
+        Vector3 targetScale = new Vector3(originalScale.x, 0.9f, originalScale.z); // Hedef boyut (y ekseni .9)
+
+        float duration = 0.2f; // Ölçekleme süresi
+        float elapsedTime = 0;
+
+        // Yavaşça hedef boyuta ölçekleme
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale; // Tam olarak hedef boyuta ayarla
+
+        // Hedef boyuttan eski boyuta dönüş
+        elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = originalScale; // Eski boyuta dön
     }
 }

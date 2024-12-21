@@ -15,5 +15,4 @@ public class DashUpgrade : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
