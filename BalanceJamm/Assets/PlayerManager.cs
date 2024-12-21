@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (giftCrashed && Input.GetKeyUp(KeyCode.R))
         {
