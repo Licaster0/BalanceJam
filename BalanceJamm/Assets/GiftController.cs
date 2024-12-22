@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GiftController : MonoBehaviour
 {
+    public TextMeshProUGUI healthText; // Text Referansı
     [SerializeField] private Sprite giftCrackSprite;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private LayerMask groundLayer; // Kontrol etmek istedi�iniz Layer'� belirlemek i�in
@@ -17,7 +19,12 @@ public class GiftController : MonoBehaviour
     [SerializeField] private GameObject gameOverScene;
     private void Start()
     {
-
+        UpdateHealthUI(); // Başlangıçta Text'i güncelle
+    }
+    private void UpdateHealthUI()
+    {
+        // Can metnini güncelle
+        healthText.text = "Can: " + PlayerManager.Instance.CurrentHealth.ToString();
     }
     private void FixedUpdate()
     {
@@ -40,6 +47,7 @@ public class GiftController : MonoBehaviour
         if (((1 << collision.gameObject.layer) & groundLayer) != 0)
         {
             PlayerManager.Instance.CurrentHealth--;
+            UpdateHealthUI();
             if (PlayerManager.Instance.CurrentHealth > 0)
             {
                 Instantiate(giftExplodeParticile.transform, gameObject.transform.position, Quaternion.identity);
