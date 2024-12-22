@@ -75,14 +75,14 @@ public class PlayerMovement : MonoBehaviour
             remainingDashes = maxDashCount; // Yere değince dash sıfırlanır
         }
 
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) && (IsGrounded() || remainingJumps > 0))
+        if (Input.GetButtonDown("Jump") && (IsGrounded() || remainingJumps > 0))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower * jumpSpeedMultiplier);
             remainingJumps--;
             StartCoroutine(ScaleDuringJump());
         }
 
-        if (Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
