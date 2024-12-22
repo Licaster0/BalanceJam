@@ -19,7 +19,7 @@ public class GiftController : MonoBehaviour
     [SerializeField] private GameObject gameOverScene;
     private void Start()
     {
-        UpdateHealthUI(); // Başlangıçta Text'i güncelle
+        //UpdateHealthUI(); // Başlangıçta Text'i güncelle
     }
     private void UpdateHealthUI()
     {
